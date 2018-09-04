@@ -1,0 +1,29 @@
+@model IEnumerable<TreeListDragDropMultipleNodes.Models.Data>
+@{
+    var treeList = Html.DevExpress().TreeList<TreeListDragDropMultipleNodes.Models.Data>(settings => {
+        settings.Name = "TreeList1";
+        settings.Width = Unit.Pixel(200);
+
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "TreeListPartial" };
+        settings.SettingsEditing.NodeDragDropRouteValues = new { Controller = "Home", Action = "TreeListDragDropAction" };
+
+        settings.KeyField(m => m.ID);
+        settings.ParentField(m => m.ParentID);
+
+        settings.Columns.Add(m => m.Title);
+
+        settings.SettingsSelection.Enabled = true;
+        settings.SettingsBehavior.AutoExpandAllNodes = true;
+        settings.Settings.ShowColumnHeaders = false;
+
+        settings.HtmlDataCellPrepared = (sender, e) =>
+        {
+            e.Cell.CssClass = "customClass";
+        };
+
+        settings.ClientSideEvents.StartDragNode = "onStartDragNode";
+        settings.ClientSideEvents.EndDragNode = "onEndDragNode";
+        settings.ClientSideEvents.BeginCallback = "onBeginCallback";
+    });
+}
+@treeList.Bind(Model).GetHtml()
