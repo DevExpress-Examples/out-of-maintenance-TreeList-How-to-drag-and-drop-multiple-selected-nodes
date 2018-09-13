@@ -22,7 +22,7 @@ namespace TreeListDragDropMultipleNodes.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult TreeListDragDropAction(int id, object[] nodeKeys, int parentID)
+        public ActionResult TreeListDragDropAction(int id, int[] nodeKeys, int parentID)
         {
             if (nodeKeys == null)
                 DataHelper.MoveNode(id, parentID);

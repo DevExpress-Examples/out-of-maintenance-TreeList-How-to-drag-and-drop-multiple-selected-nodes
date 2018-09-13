@@ -76,17 +76,27 @@ Module DataHelper
         Return data
     End Function
 
-    Sub MoveNodes(ByVal nodeKeys As Object(), ByVal parentID As Integer)
+    Sub MoveNodes(ByVal nodeKeys As Integer(), ByVal parentID As Integer)
         Dim data = GetData()
 
-        For Each key In nodeKeys
-            Dim nodeKey As Integer = Convert.ToInt32(key)
-            data.Find(Function(x) x.ID = nodeKey).ParentID = parentID
+        Dim processedNodes = data.Join(nodeKeys, Function(x) x.ID, Function(y) y, Function(x, y) x)
+
+        For Each node In processedNodes
+            If processedNodes.Where(Function(x) x.ID = node.ParentID).Count() = 0 Then
+                If node.ParentID = 0 Then
+                    MakeParentNodeRoot(parentID)
+                End If
+                node.ParentID = parentID
+            End If
         Next
     End Sub
 
     Sub MoveNode(ByVal nodeID As Integer, ByVal parentID As Integer)
         Dim data = GetData()
         data.Find(Function(x) x.ID = nodeID).ParentID = parentID
+    End Sub
+
+    Sub MakeParentNodeRoot(ByVal id As Integer)
+        GetData().Find(Function(x) x.ID = id).ParentID = 0
     End Sub
 End Module

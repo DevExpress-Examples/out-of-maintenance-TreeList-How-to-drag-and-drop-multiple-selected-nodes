@@ -21,6 +21,11 @@
             e.Cell.CssClass = "customClass";
         };
 
+        settings.BeforeGetCallbackResult = (sender, e) =>
+        {
+            ((MVCxTreeList)sender).ExpandAll();
+        };
+
         settings.ClientSideEvents.StartDragNode = "onStartDragNode";
         settings.ClientSideEvents.EndDragNode = "onEndDragNode";
         settings.ClientSideEvents.BeginCallback = "onBeginCallback";

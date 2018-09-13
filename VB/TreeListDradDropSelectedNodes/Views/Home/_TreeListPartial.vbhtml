@@ -19,6 +19,9 @@
                                                                                          settings.HtmlDataCellPrepared = Sub(sender, e)
                                                                                                                              e.Cell.CssClass = "customClass"
                                                                                                                          End Sub
+                                                                                         settings.BeforeGetCallbackResult = Sub(sender, e)
+                                                                                                                                TryCast(sender, MVCxTreeList).ExpandAll()
+                                                                                                                            End Sub
                                                                                          settings.ClientSideEvents.StartDragNode = "onStartDragNode"
                                                                                          settings.ClientSideEvents.EndDragNode = "onEndDragNode"
                                                                                          settings.ClientSideEvents.BeginCallback = "onBeginCallback"

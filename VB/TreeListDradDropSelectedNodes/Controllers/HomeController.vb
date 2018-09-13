@@ -12,7 +12,7 @@ Public Class HomeController
     End Function
 
     <HttpPost, ValidateInput(False)>
-    Public Function TreeListDragDropAction(ByVal id As Integer, ByVal nodeKeys As Object(), ByVal parentID As Integer) As ActionResult
+    Public Function TreeListDragDropAction(ByVal id As Integer, ByVal nodeKeys As Integer(), ByVal parentID As Integer) As ActionResult
         If nodeKeys Is Nothing Then
             DataHelper.MoveNode(id, parentID)
         Else

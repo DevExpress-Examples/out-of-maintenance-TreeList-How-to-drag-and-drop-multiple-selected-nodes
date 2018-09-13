@@ -46,20 +46,41 @@ namespace TreeListDragDropMultipleNodes.Models
             return data;
         }
 
-        public static void MoveNodes(object[] nodeKeys, int parentID)
+        public static void MoveNodes(int[] nodeKeys, int parentID)
         {
             var data = GetData();
-            foreach (var key in nodeKeys)
+            var processedNodes = data.Join(nodeKeys, x => x.ID, y => y, (x, y) => x);
+
+            foreach(var node in processedNodes)
             {
-                int nodeKey = Convert.ToInt32(key);
-                data.Find(x => x.ID == nodeKey).ParentID = parentID;
+                if (processedNodes.Where(x => x.ID == node.ParentID).Count() == 0)
+                {
+                    if (node.ParentID == 0)
+                    {
+                        MakeParentNodeRoot(parentID);
+                    }
+                    node.ParentID = parentID;
+                }
             }
         }
 
         public static void MoveNode(int nodeID, int parentID)
         {
             var data = GetData();
-            data.Find(x => x.ID == nodeID).ParentID = parentID;
+
+            var node = data.Find(x => x.ID == nodeID);
+
+            if (node.ParentID == 0)
+            {
+                MakeParentNodeRoot(parentID);
+            }
+
+            node.ParentID = parentID;
+        }
+
+        public static void MakeParentNodeRoot(int id)
+        {
+            GetData().Find(x => x.ID == id).ParentID = 0;
         }
     }
 }
