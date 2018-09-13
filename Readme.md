@@ -4,4 +4,4 @@ This sample illustrates how to drag and drop multiple nodes in **TreeList** when
 
 The most interesting part of this task is to show all selected nodes in a transparent popup during dragging. For this, you can handle the [StartDragNode](https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxTreeList.Scripts.ASPxClientTreeList.StartDragNode.event) event. When this event is raised, a div container is created after another container into which TreeList is placed. It is possible to find this container, clone a table row in the div container, and assign selected node values to cloned rows. The div container is created after the StartDragNode event is raised, so it is necessary to implement your own custom function and asynchronously call it in the StartDragNode event handler.
 
-***See also:***<br />[ASPxTreeList - How to drag and drop multiple nodes](https://github.com/DevExpress-Examples/aspxtreelist-how-to-drag-and-drop-multiple-nodes-t501420)
+***See also:*** <br />[ASPxTreeList - How to drag and drop multiple nodes](https://github.com/DevExpress-Examples/aspxtreelist-how-to-drag-and-drop-multiple-nodes-t501420)
