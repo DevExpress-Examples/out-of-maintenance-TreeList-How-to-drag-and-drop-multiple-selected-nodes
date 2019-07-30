@@ -1,4 +1,7 @@
 # TreeList - How to drag and drop multiple selected nodes
+<!-- run online -->
+**[[Run Online]](https://codecentral.devexpress.com/147423235/)**
+<!-- run online end -->
 
 This sample illustrates how to drag and drop multiple nodes in **TreeList** when selection is enabled. To move selected nodes from one parent node to another, it is sufficient to change selected nodes' parent field values at the DataSource level. You can do this by handling the [MVCxClientTreeList.EndDragNode](https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxTreeList.Scripts.ASPxClientTreeList.EndDragNode.event) event and saving selected node keys to a global JavaScript array. Then, it is necessary to assign this array to the **customArgs** property in the [BeginCallback](https://documentation.devexpress.com/AspNet/DevExpress.Web.MVC.Scripts.MVCxClientTreeList.BeginCallback.event) event handler. On the server side, change parent field values in a controller action specified in the [NodeDragDropRouteValues](https://documentation.devexpress.com/AspNet/DevExpress.Web.Mvc.MVCxTreeListSettingsEditing.NodeDragDropRouteValues.property) property.
 
